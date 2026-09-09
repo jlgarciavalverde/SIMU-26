@@ -33,6 +33,22 @@ Escenario interactivo nocturno (con transición a día) desarrollado en **Proces
 | `Flor` (×12) | Rotación | Ángulo acumulado + pulsación de escala con `sin()` |
 | `SistemaBrillo` | Partículas | Pool de 200 luciérnagas ambientales + explosiones al clic |
 
+## Arquitectura
+
+```mermaid
+graph TB
+    Sketch[BosqueEncantado.pde<br/>setup / draw / eventos] --> Sierpe[Sierpe<br/>rectilíneo]
+    Sketch --> MariposaS[MariposaS x8<br/>sinusoidal]
+    Sketch --> MariposaRuido[MariposaRuido<br/>ruido de Perlin]
+    Sketch --> Flor[Flor x12<br/>rotación]
+    Sketch --> SistemaBrillo[SistemaBrillo<br/>partículas]
+```
+
+El sketch principal (`BosqueEncantado.pde`) inicializa y actualiza cada criatura en su `draw()`
+loop; cada tipo de movimiento vive en su propia clase/archivo `.pde` (una responsabilidad = un
+tipo de movimiento), sin dependencias entre ellas — el sketch principal es el único punto que las
+conoce a todas y gestiona la interacción del usuario (ratón, teclado) y la transición día/noche.
+
 ## Estructura del proyecto
 
 ```
@@ -58,3 +74,7 @@ No se requieren librerías adicionales; el sketch usa únicamente la API estánd
 Proyecto académico — **Universidad de Murcia**, asignatura **Simulación**, práctica 1, curso 2025-2026.
 
 - José Luis García Valverde (jl.garciavalverde@um.es)
+
+## Licencia
+
+MIT — ver [`LICENSE`](./LICENSE).
